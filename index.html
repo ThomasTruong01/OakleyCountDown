@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link
+			href="https://fonts.googleapis.com/css?family=Mansalva&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				background-color: ghostwhite;
+			}
+
+			.container {
+				color: #333;
+				text-align: center;
+				font-family: "Mansalva", cursive;
+			}
+			header {
+				z-index: 1;
+				margin-bottom: 10px;
+			}
+			h1 {
+				transform: rotate(2deg);
+				font-weight: normal;
+				font-size: 5rem;
+				color: #333;
+			}
+
+			li {
+				display: inline-block;
+				font-size: 1.5em;
+				list-style-type: none;
+				padding: 1em;
+				text-transform: uppercase;
+			}
+
+			li span {
+				display: block;
+				font-size: 4.5rem;
+			}
+			.wrapper {
+				display: inline-block;
+			}
+			.wrapper:first-child {
+				transform: rotate(5deg);
+			}
+			.wrapper:last-child {
+				transform: rotate(3deg);
+			}
+			.wrapper:nth-child(2) {
+				transform: rotate(-3deg);
+			}
+			.wrapper:nth-child(3) {
+				transform: rotate(-10deg);
+			}
+			.postit {
+				line-height: 1;
+				text-align: center;
+				width: 275px;
+				margin: 0px;
+				min-height: 250px;
+				max-height: 250px;
+				padding-top: 35px;
+				position: relative;
+				border: 1px solid #d1d1d1;
+				border-top: 60px solid #fdfd86;
+				font-family: "Reenie Beanie";
+				font-size: 22px;
+				border-bottom-right-radius: 60px 5px;
+				display: inline-block;
+				background: #ffff88; /* Old browsers */
+				background: -moz-linear-gradient(
+					-45deg,
+					#ffff88 81%,
+					#ffff88 82%,
+					#ffff88 82%,
+					#ffffc6 100%
+				); /* FF3.6+ */
+				background: -webkit-gradient(
+					linear,
+					left top,
+					right bottom,
+					color-stop(81%, #ffff88),
+					color-stop(82%, #ffff88),
+					color-stop(82%, #ffff88),
+					color-stop(100%, #ffffc6)
+				); /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(
+					-45deg,
+					#ffff88 81%,
+					#ffff88 82%,
+					#ffff88 82%,
+					#ffffc6 100%
+				); /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(
+					-45deg,
+					#ffff88 81%,
+					#ffff88 82%,
+					#ffff88 82%,
+					#ffffc6 100%
+				); /* Opera 11.10+ */
+				background: -ms-linear-gradient(
+					-45deg,
+					#ffff88 81%,
+					#ffff88 82%,
+					#ffff88 82%,
+					#ffffc6 100%
+				); /* IE10+ */
+				background: linear-gradient(
+					135deg,
+					#ffff88 81%,
+					#ffff88 82%,
+					#ffff88 82%,
+					#ffffc6 100%
+				); /* W3C */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffff88', endColorstr='#ffffc6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+				font-family: "Mansalva", cursive;
+			}
+
+			.postit:after {
+				content: "";
+				position: absolute;
+				z-index: -10;
+				right: -0px;
+				bottom: 20px;
+				width: 200px;
+				height: 25px;
+				content: "";
+				background: rgba(0, 0, 0, 0.2);
+				box-shadow: 2px 15px 5px rgba(0, 0, 0, 0.4);
+				-moz-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+				-webkit-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+				-o-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+				-ms-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+				transform: matrix(-1, -0.1, 0, 1, 0, 0);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1 id="head">Days Remaining at Oakley:</h1>
+			</header>
+			<ul>
+				<div class="wrapper">
+					<li class="postit "><span id="days"></span>days</li>
+				</div>
+				<div class="wrapper">
+					<li class="postit"><span id="hours"></span>Hours</li>
+				</div>
+				<div class="wrapper">
+					<li class="postit"><span id="minutes"></span>Minutes</li>
+				</div>
+				<div class="wrapper">
+					<li class="postit"><span id="seconds"></span>Seconds</li>
+				</div>
+			</ul>
+		</div>
+
+		<script>
+			// Set the date we're counting down to
+			var countDownDate = new Date("Oct 4, 2019 13:30:00").getTime();
+			var month = new Date().getMonth() + 1;
+			var day = new Date().getDate();
+			var year = new Date().getYear() + 1900;
+			var countDownHour = new Date(
+				month + "/" + day + "/" + year + " 13:00:00"
+			).getTime();
+			// Update the count down every 1 second
+			var x = setInterval(function() {
+				// Get today's date and time
+				var now = new Date().getTime();
+
+				// Find the distance between now and the count down date
+				var distance = countDownDate - now - 1000 * 60 * 60 * 24 * 2;
+				var distanceH = countDownHour - now;
+				// Time calculations for days, hours, minutes and seconds
+				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+				var hours = Math.floor(
+					(distanceH % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+				);
+				var minutes = Math.floor((distanceH % (1000 * 60 * 60)) / (1000 * 60));
+				var seconds = Math.floor((distanceH % (1000 * 60)) / 1000);
+
+				// Output the result in an element with id="demo"
+				document.getElementById("days").innerHTML = days;
+				document.getElementById("hours").innerHTML = hours;
+				document.getElementById("minutes").innerHTML = minutes;
+				document.getElementById("seconds").innerHTML = seconds;
+
+				// If the count down is over, write some text
+				if (distance < 0) {
+					clearInterval(x);
+					document.getElementById("demo").innerHTML = "EXPIRED";
+				}
+			}, 1000);
+		</script>
+	</body>
+</html>
